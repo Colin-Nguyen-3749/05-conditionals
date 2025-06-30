@@ -11,19 +11,20 @@ weatherForm.addEventListener('submit', function(event) {
   const weatherSelect = document.getElementById('weather');
   const weather = weatherSelect.value;
 
+  // Get the temperature value from the input
+  const temperatureInput = document.getElementById('temperature');
+  const temperature = Number(temperatureInput.value);
+
   // Create a variable for the suggestion message
   let message = '';
 
-  // Check the weather and set the message
-  if (weather === 'sunny') {
+  // Check if weather is cloudy or rainy
+  if (weather === 'cloudy' || weather === 'rainy') {
+    // Suggest a light jacket for cloudy or rainy weather
+    message = `It's ${weather}! A light jacket might be a good idea.`;
+  } else if (weather === 'sunny') {
     // If it's sunny
     message = `It's sunny! 😎 Don't forget your sunglasses.`;
-  } else if (weather === 'cloudy') {
-    // If it's cloudy
-    message = `It's cloudy! ☁️ You might want a light sweater.`;
-  } else if (weather === 'rainy') {
-    // If it's rainy
-    message = `It's rainy! 🌧️ Bring an umbrella.`;
   } else if (weather === 'snowy') {
     // If it's snowy
     message = `It's snowy! ❄️ Wear warm boots and a coat.`;
@@ -33,6 +34,12 @@ weatherForm.addEventListener('submit', function(event) {
   } else {
     // If no weather is selected
     message = `Please select the weather.`;
+  }
+
+  // Check if temperature is below 50°F and add suggestion
+  if (temperature < 50 && weather !== '') {
+    // Add a suggestion for a warm jacket
+    message = `${message} It's cold! 🧥 Wear a warm jacket.`;
   }
 
   // Show the suggestion message in the suggestion section
